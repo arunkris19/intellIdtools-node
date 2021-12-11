@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV !== "production") {
-    require("dotenv").parse()
+    require("dotenv").config()
 }
 
 
@@ -10,12 +10,13 @@ const expressLayouts = require("express-ejs-layouts")
 
 const indexRouter = require("./routes/index")
 
-const mongoose = require("mongoose");
 const nodemon = require("nodemon");
+
+/** database config */
+const mongoose = require("mongoose");
 mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser: true
 })
-/** database config */
 const db = mongoose.connection
 db.on("error", error => console.log(error))
 db.on("open", () => console.log("Connected to DB server"))
